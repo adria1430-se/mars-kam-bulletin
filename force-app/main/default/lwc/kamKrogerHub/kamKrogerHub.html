@@ -1,0 +1,86 @@
+<template>
+    <div class="hub-wrapper">
+
+        <!-- ═══ Split Layout ═══ -->
+        <div class="hub-split">
+
+            <!-- ─── Left: JBP Timeline (narrower) ─── -->
+            <div class="hub-left">
+                <h2 class="hub-section-title">Kroger JBP Timeline</h2>
+
+                <template for:each={events} for:item="evt">
+                    <div key={evt.id} class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="countdown-badge">{evt.badge}</div>
+                            <p class="timeline-label">{evt.label}</p>
+                        </div>
+                    </div>
+                </template>
+
+                <div class="hub-left-actions">
+                    <lightning-button
+                        label="Schedule Meeting"
+                        variant="neutral"
+                        icon-name="utility:event"
+                        icon-position="left"
+                        onclick={handleScheduleMeeting}>
+                    </lightning-button>
+                </div>
+            </div>
+
+            <!-- ─── Divider ─── -->
+            <div class="hub-divider"></div>
+
+            <!-- ─── Right: Key Contact (wider) ─── -->
+            <div class="hub-right">
+                <h2 class="hub-section-title">Key Contact Quick View</h2>
+
+                <div class="contact-block">
+                    <div class="contact-avatar">MA</div>
+                    <div class="contact-info">
+                        <p class="contact-name">{contact.name}</p>
+                        <p class="contact-title">{contact.title}</p>
+                    </div>
+                </div>
+
+                <div class="contact-meta">
+                    <span class="meta-item">
+                        <lightning-icon icon-name="utility:email" size="xx-small" class="meta-icon"></lightning-icon>
+                        {contact.email}
+                    </span>
+                    <span class="meta-item">
+                        <lightning-icon icon-name="utility:location" size="xx-small" class="meta-icon"></lightning-icon>
+                        {contact.location}
+                    </span>
+                </div>
+
+                <div class="coffee-note">
+                    <span class="coffee-note-label">
+                        <lightning-icon icon-name="utility:note" size="xx-small" class="meta-icon"></lightning-icon>
+                        Last Coffee Chat Note
+                    </span>
+                    <p class="coffee-note-text">{contact.note}</p>
+                </div>
+
+                <div class="hub-actions">
+                    <lightning-button
+                        label="Log a Call"
+                        variant="neutral"
+                        icon-name="utility:log_a_call"
+                        icon-position="left"
+                        onclick={handleLogCall}>
+                    </lightning-button>
+                    <lightning-button
+                        label="Send Email"
+                        variant="brand"
+                        icon-name="utility:email"
+                        icon-position="left"
+                        onclick={handleSendEmail}>
+                    </lightning-button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>

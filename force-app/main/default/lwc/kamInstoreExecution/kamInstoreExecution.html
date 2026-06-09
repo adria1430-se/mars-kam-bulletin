@@ -1,0 +1,47 @@
+<template>
+    <div class="ise-wrapper">
+
+        <!-- ═══ Header ═══ -->
+        <div class="ise-header">
+            <h1 class="ise-title">In-Store Execution — {currentMonthYear}</h1>
+            <p class="ise-source">Source: Salesforce Retail Execution&nbsp;&nbsp;|&nbsp;&nbsp;Region: Kroger All Divisions</p>
+        </div>
+
+        <!-- ═══ KPI Tiles ═══ -->
+        <div class="ise-tiles">
+            <div class="ise-tile">
+                <div class="tile-value">847</div>
+                <div class="tile-label">Visits Completed</div>
+                <div class="tile-sub">900 planned (94%)</div>
+            </div>
+            <div class="ise-tile">
+                <div class="tile-value">91.2%</div>
+                <div class="tile-label">Store Compliance</div>
+                <div class="tile-sub">+2.1 pts MoM</div>
+            </div>
+            <div class="ise-tile">
+                <div class="tile-value">3,412</div>
+                <div class="tile-label">Tasks Completed</div>
+                <div class="tile-sub">96% completion</div>
+            </div>
+        </div>
+
+        <!-- ═══ Perfect Store Score by Banner ═══ -->
+        <div class="ise-section">
+            <p class="ise-section-eyebrow">PERFECT STORE SCORE BY BANNER</p>
+
+            <template for:each={banners} for:item="banner">
+                <div key={banner.id} class="banner-row">
+                    <div class="banner-name">{banner.name}</div>
+                    <div class="banner-bar-wrap">
+                        <div class="banner-bar-track">
+                            <div class="banner-bar-fill" style={banner.barStyle}></div>
+                        </div>
+                    </div>
+                    <div class="banner-pct">{banner.pct}%</div>
+                </div>
+            </template>
+        </div>
+
+    </div>
+</template>

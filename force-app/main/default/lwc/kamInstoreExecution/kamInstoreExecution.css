@@ -1,0 +1,119 @@
+/* ═══════════════════════════════════════
+   Wrapper
+═══════════════════════════════════════ */
+.ise-wrapper {
+    background: #ffffff;
+    border: 1px solid #dddbda;
+    border-radius: 0.5rem;
+    padding: 1.25rem 1.5rem 1.5rem;
+    font-family: 'Salesforce Sans', Arial, sans-serif;
+}
+
+/* ═══════════════════════════════════════
+   Header
+═══════════════════════════════════════ */
+.ise-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #181818;
+    margin: 0 0 0.25rem;
+}
+
+.ise-source {
+    font-size: 0.8125rem;
+    color: #5e6e82;
+    margin: 0 0 1.125rem;
+}
+
+/* ═══════════════════════════════════════
+   KPI Tiles
+═══════════════════════════════════════ */
+.ise-tiles {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.ise-tile {
+    flex: 1;
+    border: 1px solid #e0e5ee;
+    border-radius: 0.375rem;
+    padding: 1rem 0.875rem;
+    text-align: center;
+}
+
+.tile-value {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #181818;
+    line-height: 1.1;
+}
+
+.tile-label {
+    font-size: 0.8125rem;
+    color: #5e6e82;
+    margin: 0.3rem 0 0.25rem;
+}
+
+.tile-sub {
+    font-size: 0.8125rem;
+    color: #0176d3;
+    font-weight: 500;
+}
+
+/* ═══════════════════════════════════════
+   Banner Section
+═══════════════════════════════════════ */
+.ise-section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #5e6e82;
+    text-transform: uppercase;
+    margin: 0 0 0.875rem;
+}
+
+.banner-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.875rem;
+}
+
+.banner-row:last-child {
+    margin-bottom: 0;
+}
+
+.banner-name {
+    font-size: 0.875rem;
+    color: #3e3e3c;
+    width: 9rem;
+    flex-shrink: 0;
+}
+
+.banner-bar-wrap {
+    flex: 1;
+}
+
+.banner-bar-track {
+    background: #e8e8e8;
+    border-radius: 999px;
+    height: 0.5rem;
+    overflow: hidden;
+}
+
+.banner-bar-fill {
+    height: 100%;
+    background: #0176d3;
+    border-radius: 999px;
+    transition: width 0.4s ease;
+}
+
+.banner-pct {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #181818;
+    width: 2.5rem;
+    text-align: right;
+    flex-shrink: 0;
+}

@@ -1,0 +1,277 @@
+<template>
+    <div class="jbp-wrapper">
+
+        <!-- ═══ Card Header ═══ -->
+        <div class="jbp-hero">
+            <lightning-icon icon-name="standard:account_intelligence" size="small" class="jbp-hero-icon"></lightning-icon>
+            <div>
+                <h1 class="jbp-title">Joint Business Plan — Kroger FY2026</h1>
+                <p class="jbp-meta">Account: Kroger Co.&nbsp;&nbsp;|&nbsp;&nbsp;KAM: Sarah Mitchell&nbsp;&nbsp;|&nbsp;&nbsp;Period: Jan–Dec 2026</p>
+            </div>
+        </div>
+
+        <!-- ═══ Tab Set ═══ -->
+        <lightning-tabset variant="default">
+
+            <!-- ─── Tab 1: Retailer Commitments ─── -->
+            <lightning-tab label="Retailer Commitments" icon-name="utility:location" value="retailer">
+                <div class="tab-body">
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">Retailer Commitments</h2>
+                            <p class="section-subtitle">Kroger — FY2026 JBP Commitments vs. Plan</p>
+                        </div>
+                        <div class="overall-compliance">
+                            <span class="overall-label">Overall Compliance</span>
+                            <span class="pct-badge">{overallCompliance}%</span>
+                        </div>
+                    </div>
+
+                    <template for:each={retailerCommitments} for:item="row">
+                        <div key={row.id} class="metric-row">
+                            <div class="metric-top">
+                                <span class="metric-label">{row.label}</span>
+                                <div class="metric-right">
+                                    <span class="metric-values">{row.actual} / {row.target}</span>
+                                    <span class="pct-badge">{row.pct}%</span>
+                                </div>
+                            </div>
+                            <div class="progress-track"
+                                role="progressbar"
+                                aria-valuenow={row.pct}
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                aria-label={row.label}>
+                                <div class="progress-fill" style={row.barStyle}></div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </lightning-tab>
+
+            <!-- ─── Tab 2: Internal Workflows ─── -->
+            <lightning-tab label="Internal Workflows" icon-name="utility:record_lookup" value="workflows">
+                <div class="tab-body">
+
+                    <!-- R&D Sample Requests -->
+                    <div class="section-block">
+                        <div class="section-header">
+                            <div>
+                                <h2 class="section-title">R&amp;D Sample Requests</h2>
+                                <p class="section-subtitle">New item samples submitted for Kroger review</p>
+                            </div>
+                            <lightning-button
+                                label="Submit Request"
+                                icon-name="utility:add"
+                                icon-position="left"
+                                onclick={openSampleModal}>
+                            </lightning-button>
+                        </div>
+                        <table class="jbp-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Owner</th>
+                                    <th scope="col">Due Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={sampleRequests} for:item="req">
+                                    <tr key={req.id}>
+                                        <td>{req.product}</td>
+                                        <td><span class={req.statusClass}>{req.status}</span></td>
+                                        <td>{req.owner}</td>
+                                        <td>{req.dueDate}</td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- New Item Launch Milestones -->
+                    <div class="section-block slds-m-top_large">
+                        <div class="section-header">
+                            <div>
+                                <h2 class="section-title">New Item Launch Milestones</h2>
+                                <p class="section-subtitle">Cross-functional commitments and launch dates</p>
+                            </div>
+                            <lightning-button
+                                label="Update Milestone"
+                                icon-name="utility:edit"
+                                icon-position="left"
+                                onclick={openMilestoneModal}>
+                            </lightning-button>
+                        </div>
+                        <table class="jbp-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Item</th>
+                                    <th scope="col">Milestone</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={milestones} for:item="ms">
+                                    <tr key={ms.id}>
+                                        <td>{ms.item}</td>
+                                        <td>{ms.milestone}</td>
+                                        <td>{ms.date}</td>
+                                        <td><span class={ms.statusClass}>{ms.status}</span></td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </lightning-tab>
+
+            <!-- ─── Tab 3: $ Tracking ─── -->
+            <lightning-tab label="$ Tracking" icon-name="utility:currency" value="tracking">
+                <div class="tab-body">
+                    <h2 class="section-title">$ Tracking vs. Plan</h2>
+                    <p class="section-subtitle slds-m-bottom_medium">FY2026 actuals vs. JBP targets — updated monthly</p>
+
+                    <template for:each={trackingMetrics} for:item="row">
+                        <div key={row.id} class="metric-row">
+                            <div class="metric-top">
+                                <span class="metric-label">{row.label}</span>
+                                <div class="metric-right">
+                                    <span class="metric-values">{row.actual} / {row.target}</span>
+                                    <span class="pct-badge">{row.pct}%</span>
+                                </div>
+                            </div>
+                            <div class="progress-track"
+                                role="progressbar"
+                                aria-valuenow={row.pct}
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                aria-label={row.label}>
+                                <div class="progress-fill" style={row.barStyle}></div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </lightning-tab>
+
+        </lightning-tabset>
+    </div>
+
+    <!-- ═══ R&D Sample Request Modal ═══ -->
+    <template lwc:if={showSampleModal}>
+        <section
+            role="dialog"
+            tabindex="-1"
+            aria-modal="true"
+            aria-labelledby="sample-modal-heading"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon
+                        icon-name="utility:close"
+                        class="slds-modal__close"
+                        alternative-text="Close"
+                        title="Close"
+                        onclick={closeSampleModal}>
+                    </lightning-button-icon>
+                    <h2 id="sample-modal-heading" class="slds-modal__title">Submit Sample Request</h2>
+                    <p class="slds-m-top_x-small slds-text-color_weak">Route a new product sample request to R&amp;D for Kroger review</p>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-input
+                        label="Product Name"
+                        placeholder="e.g. Bigfoot Ranch Ridge"
+                        value={sampleForm.productName}
+                        onchange={handleSampleChange}
+                        data-field="productName">
+                    </lightning-input>
+                    <div class="slds-m-top_small">
+                        <lightning-input
+                            label="Sample Quantity"
+                            placeholder="Units requested"
+                            type="number"
+                            min="1"
+                            value={sampleForm.sampleQuantity}
+                            onchange={handleSampleChange}
+                            data-field="sampleQuantity">
+                        </lightning-input>
+                    </div>
+                    <div class="slds-m-top_small">
+                        <lightning-textarea
+                            label="Notes for R&amp;D"
+                            placeholder="Shelf date, pack size, flavour profile notes..."
+                            value={sampleForm.notes}
+                            onchange={handleSampleChange}
+                            data-field="notes">
+                        </lightning-textarea>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={closeSampleModal}></lightning-button>
+                    <lightning-button variant="brand" label="Request Sample" onclick={submitSampleRequest}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" onclick={closeSampleModal}></div>
+    </template>
+
+    <!-- ═══ Milestone Update Modal ═══ -->
+    <template lwc:if={showMilestoneModal}>
+        <section
+            role="dialog"
+            tabindex="-1"
+            aria-modal="true"
+            aria-labelledby="milestone-modal-heading"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon
+                        icon-name="utility:close"
+                        class="slds-modal__close"
+                        alternative-text="Close"
+                        title="Close"
+                        onclick={closeMilestoneModal}>
+                    </lightning-button-icon>
+                    <h2 id="milestone-modal-heading" class="slds-modal__title">Update Milestone</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-combobox
+                        label="Milestone"
+                        placeholder="Select milestone..."
+                        options={milestoneOptions}
+                        value={milestoneForm.milestone}
+                        onchange={handleMilestoneChange}
+                        data-field="milestone">
+                    </lightning-combobox>
+                    <div class="slds-m-top_small">
+                        <lightning-combobox
+                            label="New Status"
+                            placeholder="Select status..."
+                            options={statusOptions}
+                            value={milestoneForm.status}
+                            onchange={handleMilestoneChange}
+                            data-field="status">
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-m-top_small">
+                        <lightning-textarea
+                            label="Update Notes"
+                            placeholder="Describe the update..."
+                            value={milestoneForm.notes}
+                            onchange={handleMilestoneChange}
+                            data-field="notes">
+                        </lightning-textarea>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={closeMilestoneModal}></lightning-button>
+                    <lightning-button variant="brand" label="Save Update" onclick={submitMilestoneUpdate}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" onclick={closeMilestoneModal}></div>
+    </template>
+
+</template>

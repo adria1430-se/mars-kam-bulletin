@@ -1,0 +1,42 @@
+<template>
+    <div class="header-wrapper slds-border_bottom">
+        <div class="slds-grid slds-wrap slds-grid_align-spread slds-grid_vertical-align-center slds-p-around_medium">
+
+            <!-- ═══ LEFT: Identity ═══ -->
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12 identity-col">
+                <div class="identity-text">
+                    <h1 class="header-title">KAM Command Center</h1>
+                    <p class="header-subtitle">Welcome back, Sarah&nbsp;&nbsp;|&nbsp;&nbsp;Key Account Manager&nbsp;&nbsp;|&nbsp;&nbsp;{today}</p>
+                </div>
+            </div>
+
+            <!-- ═══ RIGHT: Quick Actions ═══ -->
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_7-of-12 actions-col">
+                <div class="action-group">
+                    <lightning-button
+                        label="New Strategic Win"
+                        variant="brand"
+                        icon-name="standard:opportunity"
+                        icon-position="left"
+                        onclick={handleNewWin}>
+                    </lightning-button>
+                    <lightning-button
+                        label="Log Kroger Interaction"
+                        variant="neutral"
+                        icon-name="standard:log_a_call"
+                        icon-position="left"
+                        onclick={handleLogInteraction}>
+                    </lightning-button>
+                    <lightning-button
+                        label="84.51° Portal"
+                        variant="neutral"
+                        icon-name="utility:new_window"
+                        icon-position="left"
+                        onclick={handlePortal}>
+                    </lightning-button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>

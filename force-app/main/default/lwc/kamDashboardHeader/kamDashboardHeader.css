@@ -1,0 +1,84 @@
+/* ═══════════════════════════════════════
+   Header Shell
+═══════════════════════════════════════ */
+.header-wrapper {
+    background: #ffffff;
+    font-family: 'Salesforce Sans', Arial, sans-serif;
+}
+
+/* ═══════════════════════════════════════
+   LEFT — Identity
+═══════════════════════════════════════ */
+.identity-col {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+}
+
+/* ─── Title + Subtitle ─── */
+.identity-text {
+    min-width: 0;
+}
+
+.header-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #181818;
+    margin: 0;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header-subtitle {
+    font-size: 0.8125rem;
+    color: #5e6e82;
+    margin: 0.125rem 0 0;
+    white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════
+   RIGHT — Quick Actions
+═══════════════════════════════════════ */
+.actions-col {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.action-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+/* ═══════════════════════════════════════
+   Responsive — stack on small screens
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+    .identity-col,
+    .context-col,
+    .actions-col {
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 0.75rem;
+    }
+
+    .identity-col {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header-title,
+    .header-subtitle {
+        white-space: normal;
+        text-align: center;
+    }
+
+    .actions-col {
+        justify-content: center;
+    }
+}

@@ -1,0 +1,23 @@
+# Salesforce CLI / DX auth & config
+.sf/
+.sfdx/
+
+# Node
+node_modules/
+.npmrc
+
+# Environment / secrets
+.env
+.env.*
+
+# macOS
+.DS_Store
+
+# Scratch org definitions (contain no credentials but are env-specific)
+*.scratch.org
+
+# Jest coverage
+coverage/
+
+# VS Code (optional — remove if your team shares these settings)
+.vscode/settings.json

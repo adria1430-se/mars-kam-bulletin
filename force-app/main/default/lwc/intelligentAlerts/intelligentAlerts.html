@@ -1,0 +1,289 @@
+<template>
+    <div class="ia-wrapper">
+
+        <!-- ═══ Header ═══ -->
+        <div class="ia-header">
+            <lightning-icon icon-name="utility:notification" size="small" class="ia-header-icon"></lightning-icon>
+            <h1 class="ia-title">Intelligent Alerts</h1>
+        </div>
+
+        <!-- ═══ Alert Feed ═══ -->
+        <ul class="ia-feed" role="list">
+
+            <!-- ─── Card 1: Short Ship ─── -->
+            <li class="ia-card" role="listitem">
+                <div class="ia-card-icon-col">
+                    <span class="alert-icon-wrap alert-error">
+                        <lightning-icon icon-name="utility:ban" size="x-small" alternative-text="Error"></lightning-icon>
+                    </span>
+                </div>
+                <div class="ia-card-body">
+                    <p class="ia-card-title">Short Ship — Kroger DC 7042</p>
+                    <p class="ia-card-desc">PO #KR-2024-8841: 4,200 cases ordered, 3,150 shipped (75%). 1,050 cases outstanding. Est. lost revenue: $31,500.</p>
+                </div>
+                <div class="ia-card-action">
+                    <lightning-button label="Submit Backorder" variant="brand" onclick={openBackorderModal}></lightning-button>
+                </div>
+            </li>
+
+            <!-- ─── Card 2: Trade Funds ─── -->
+            <li class="ia-card" role="listitem">
+                <div class="ia-card-icon-col">
+                    <span class="alert-icon-wrap alert-warning">
+                        <lightning-icon icon-name="utility:warning" size="x-small" alternative-text="Warning"></lightning-icon>
+                    </span>
+                </div>
+                <div class="ia-card-body">
+                    <p class="ia-card-title">Trade Funds: Overspent 12%</p>
+                    <p class="ia-card-desc">Kroger Q3 budget $2.4M — $2.69M accrued. 3 active promos still running. Action required before period close.</p>
+                </div>
+                <div class="ia-card-action">
+                    <lightning-button label="Submit IFR" variant="neutral" onclick={openIfrModal}></lightning-button>
+                </div>
+            </li>
+
+            <!-- ─── Card 3: Distribution Gap ─── -->
+            <li class="ia-card" role="listitem">
+                <div class="ia-card-icon-col">
+                    <span class="alert-icon-wrap alert-opportunity">
+                        <lightning-icon icon-name="utility:trending" size="x-small" alternative-text="Opportunity"></lightning-icon>
+                    </span>
+                </div>
+                <div class="ia-card-body">
+                    <p class="ia-card-title">M&amp;M's Peanut +9%</p>
+                    <p class="ia-card-desc">Unit velocity up vs. YA. 3 Kroger divisions underindexing on % ACV — distribution gap = incremental revenue opportunity.</p>
+                </div>
+                <div class="ia-card-action">
+                    <lightning-button label="View Distribution Report" variant="neutral" onclick={openDistModal}></lightning-button>
+                </div>
+            </li>
+
+            <!-- ─── Card 4: Seasonal Sell-In ─── -->
+            <li class="ia-card" role="listitem">
+                <div class="ia-card-icon-col">
+                    <span class="alert-icon-wrap alert-neutral">
+                        <lightning-icon icon-name="utility:event" size="x-small" alternative-text="Calendar"></lightning-icon>
+                    </span>
+                </div>
+                <div class="ia-card-body">
+                    <p class="ia-card-title">Seasonal Sell-In Window Open</p>
+                    <p class="ia-card-desc">Fall/Holiday commit deadline: June 15. 4 Mars items not yet committed by Kroger buyer. Sell sheets ready.</p>
+                </div>
+                <div class="ia-card-action">
+                    <lightning-button label="View Commit Tracker" variant="neutral" onclick={openCommitModal}></lightning-button>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════
+         MODAL 1 — Submit Backorder
+    ══════════════════════════════════════════════════ -->
+    <template lwc:if={showBackorderModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="bo-heading" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container modal-medium">
+                <header class="slds-modal__header modal-header-centered">
+                    <lightning-button-icon icon-name="utility:close" class="slds-modal__close" alternative-text="Close" title="Close" onclick={closeBackorderModal}></lightning-button-icon>
+                    <h2 id="bo-heading" class="slds-modal__title">Submit Backorder — Kroger DC 7042</h2>
+                    <p class="modal-subtitle">PO #KR-2024-8841&nbsp;|&nbsp;Short Ship Resolution</p>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium">
+                    <!-- Stat tiles -->
+                    <div class="stat-tiles">
+                        <div class="stat-tile">
+                            <div class="stat-value">4,200</div>
+                            <div class="stat-label">Cases Ordered</div>
+                        </div>
+                        <div class="stat-tile">
+                            <div class="stat-value">3,150</div>
+                            <div class="stat-label">Cases Shipped</div>
+                        </div>
+                        <div class="stat-tile stat-tile-alert">
+                            <div class="stat-value stat-value-alert">1,050</div>
+                            <div class="stat-label">Outstanding</div>
+                        </div>
+                    </div>
+
+                    <!-- Form fields -->
+                    <div class="slds-m-top_medium">
+                        <lightning-input label="PO Number" value="KR-2024-8841" read-only></lightning-input>
+                    </div>
+                    <div class="slds-m-top_small">
+                        <lightning-input label="Cases to Backorder" value="1,050"></lightning-input>
+                    </div>
+                    <div class="slds-m-top_small">
+                        <lightning-combobox
+                            label="Short Ship Reason"
+                            value="Supply Constraint — DC Capacity"
+                            options={backorderReasons}
+                            placeholder="Select reason">
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-m-top_small">
+                        <lightning-textarea
+                            label="Notes to Kroger Replenishment Team"
+                            value="Supply constraint at Boise DC resolved as of 5/27. Backorder of 1,050 cases targeting ship 6/3. Will confirm with your replenishment team.">
+                        </lightning-textarea>
+                    </div>
+
+                    <!-- CRM Note -->
+                    <div class="crm-note slds-m-top_small">
+                        <span class="crm-note-label">CRM Note:</span> Kroger buyer last contacted 5/14 (call log by S. Mitchell). Open opportunity: Kroger FY25 Fall — $2.1M. Next scheduled check-in: 6/2.
+                    </div>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={closeBackorderModal}></lightning-button>
+                    <lightning-button variant="brand" label="Submit Backorder" onclick={closeBackorderModal}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" onclick={closeBackorderModal}></div>
+    </template>
+
+
+    <!-- ══════════════════════════════════════════════════
+         MODAL 2 — Submit IFR
+    ══════════════════════════════════════════════════ -->
+    <template lwc:if={showIfrModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="ifr-heading" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container modal-medium">
+                <header class="slds-modal__header modal-header-centered">
+                    <lightning-button-icon icon-name="utility:close" class="slds-modal__close" alternative-text="Close" title="Close" onclick={closeIfrModal}></lightning-button-icon>
+                    <h2 id="ifr-heading" class="slds-modal__title">Trade Funds — IFR Workflow</h2>
+                    <p class="modal-subtitle">Powered by Salesforce Flow&nbsp;|&nbsp;TPM Integration</p>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium">
+                    <h3 class="ifr-section-title">IFR Submission Flow</h3>
+                    <div class="slds-m-bottom_medium">
+                        <p class="ifr-context-label">Trade Funds — Incremental Funding Request</p>
+                        <p class="ifr-context-sub">Account: Kroger Co.&nbsp;|&nbsp;Period: Q3 2025&nbsp;|&nbsp;Budget: $2.40M&nbsp;|&nbsp;Accrued: $2.69M</p>
+                    </div>
+                    <lightning-input label="IFR Amount Requested" field-level-help="Enter the incremental amount required" value="$290,000" required></lightning-input>
+                    <div class="slds-m-top_small">
+                        <lightning-textarea
+                            label="Business Justification"
+                            value="Q3 feature event with Kroger accelerated by buyer request — 3 incremental TPRs across Midwest division for M&amp;M's Peanut SKUs."
+                            required>
+                        </lightning-textarea>
+                    </div>
+                    <div class="slds-m-top_small">
+                        <lightning-combobox
+                            label="Route to Approver"
+                            value="Regional VP — Midwest (J. Torres)"
+                            options={approverOptions}
+                            required>
+                        </lightning-combobox>
+                    </div>
+                </div>
+
+                <footer class="slds-modal__footer ifr-footer">
+                    <lightning-button label="Cancel" onclick={closeIfrModal}></lightning-button>
+                    <lightning-button variant="brand" label="Review" onclick={closeIfrModal}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" onclick={closeIfrModal}></div>
+    </template>
+
+
+    <!-- ══════════════════════════════════════════════════
+         MODAL 3 — Distribution Report
+    ══════════════════════════════════════════════════ -->
+    <template lwc:if={showDistModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="dist-heading" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container modal-medium">
+                <header class="slds-modal__header modal-header-centered">
+                    <lightning-button-icon icon-name="utility:close" class="slds-modal__close" alternative-text="Close" title="Close" onclick={closeDistModal}></lightning-button-icon>
+                    <h2 id="dist-heading" class="slds-modal__title">M&amp;M's Peanut — Distribution Report</h2>
+                    <p class="modal-subtitle">Item #MMP-8831&nbsp;|&nbsp;Kroger Division Breakdown</p>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium">
+                    <p class="dist-intro">Item trending +9% unit velocity vs. YA. Divisions highlighted in red are underindexing vs. total chain average.</p>
+                    <table class="dist-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Division</th>
+                                <th scope="col" class="col-right">% ACV</th>
+                                <th scope="col" class="col-right">Gap to Target</th>
+                                <th scope="col" class="col-right">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={divisionRows} for:item="row">
+                                <tr key={row.id}>
+                                    <td>{row.division}</td>
+                                    <td class="col-right">{row.acv}</td>
+                                    <td class={row.gapClass}>{row.gap}</td>
+                                    <td class={row.statusClass}>{row.status}</td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={closeDistModal}></lightning-button>
+                    <lightning-button variant="brand" label="Export Report" onclick={closeDistModal}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" onclick={closeDistModal}></div>
+    </template>
+
+
+    <!-- ══════════════════════════════════════════════════
+         MODAL 4 — Commit Tracker
+    ══════════════════════════════════════════════════ -->
+    <template lwc:if={showCommitModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="commit-heading" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container modal-medium">
+                <header class="slds-modal__header modal-header-centered">
+                    <lightning-button-icon icon-name="utility:close" class="slds-modal__close" alternative-text="Close" title="Close" onclick={closeCommitModal}></lightning-button-icon>
+                    <h2 id="commit-heading" class="slds-modal__title">Seasonal Sell-In Commit Tracker</h2>
+                    <p class="modal-subtitle">Kroger&nbsp;|&nbsp;Fall/Holiday 2026&nbsp;|&nbsp;Deadline: June 15, 2026</p>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div class="commit-deadline-banner">
+                        <lightning-icon icon-name="utility:clock" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                        <span><strong>12 days remaining</strong> — Sell sheets ready and delivered to Kroger buyer (M. Albright).</span>
+                    </div>
+
+                    <table class="dist-table slds-m-top_small">
+                        <thead>
+                            <tr>
+                                <th scope="col">Item</th>
+                                <th scope="col">Season</th>
+                                <th scope="col" class="col-right">Est. Volume</th>
+                                <th scope="col" class="col-right">Commit Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={commitItems} for:item="item">
+                                <tr key={item.id}>
+                                    <td>{item.name}</td>
+                                    <td>{item.season}</td>
+                                    <td class="col-right">{item.volume}</td>
+                                    <td class={item.statusClass}>{item.status}</td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={closeCommitModal}></lightning-button>
+                    <lightning-button variant="brand" label="Send Reminder to Buyer" onclick={closeCommitModal}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" onclick={closeCommitModal}></div>
+    </template>
+
+</template>

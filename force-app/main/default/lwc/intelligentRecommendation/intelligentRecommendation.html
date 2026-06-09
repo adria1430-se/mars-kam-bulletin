@@ -1,0 +1,51 @@
+<template>
+    <div class="ir-wrapper">
+
+        <!-- ═══ Header ═══ -->
+        <div class="ir-header">
+            <lightning-icon icon-name="utility:einstein" size="small" class="ir-header-icon"></lightning-icon>
+            <span class="ir-header-title">Intelligent Recommendations</span>
+        </div>
+
+        <!-- ═══ Card Feed ═══ -->
+        <div class="ir-feed">
+
+            <template lwc:if={hasCards}>
+                <template for:each={visibleCards} for:item="card">
+                    <div key={card.id} class={card.wrapClass}>
+
+                        <!-- Product Image Banner -->
+                        <div class="ir-card-banner">
+                            <img src={card.imageUrl} alt={card.productShort} class="ir-banner-img" />
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="ir-card-body">
+                            <p class="ir-card-text">{card.recommendation}</p>
+                            <div class="ir-card-actions">
+                                <lightning-button
+                                    label="Learn More"
+                                    variant="neutral"
+                                    data-id={card.id}
+                                    onclick={handleLearnMore}>
+                                </lightning-button>
+                                <button class="ir-dismiss-btn" data-id={card.id} onclick={handleDismiss}>Dismiss</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </template>
+            </template>
+
+            <template lwc:else>
+                <div class="ir-empty">
+                    <lightning-icon icon-name="utility:check" size="medium" class="ir-empty-icon"></lightning-icon>
+                    <p class="ir-empty-text">All recommendations reviewed</p>
+                    <lightning-button label="Restore All" variant="neutral" onclick={handleRestore}></lightning-button>
+                </div>
+            </template>
+
+        </div>
+
+    </div>
+</template>

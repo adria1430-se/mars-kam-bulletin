@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage,lightning__RecordPage">
+
+            <!-- Card 1 -->
+            <property
+                name="card1Title"
+                type="String"
+                label="Card 1 — Product Name"
+                default="Snickers Fun Size Multipack"
+                description="Display name shown below the image."/>
+            <property
+                name="card1ImageUrl"
+                type="String"
+                label="Card 1 — Image URL"
+                description="Full URL to the product image (e.g. a Salesforce static resource URL). Leave blank to use the default image."/>
+            <property
+                name="card1Text"
+                type="String"
+                label="Card 1 — Recommendation Text"
+                default="Product sales in decline for Snickers Fun Size Multipack at Kroger Midwest. Ensure Halloween promotion is displayed correctly and secondary signage is in place."
+                description="The recommendation body text shown on the card."/>
+
+            <!-- Card 2 -->
+            <property
+                name="card2Title"
+                type="String"
+                label="Card 2 — Product Name"
+                default="Kind Dark Chocolate Almond Coconut"
+                description="Display name shown below the image."/>
+            <property
+                name="card2ImageUrl"
+                type="String"
+                label="Card 2 — Image URL"
+                description="Full URL to the product image (e.g. a Salesforce static resource URL). Leave blank to use the default image."/>
+            <property
+                name="card2Text"
+                type="String"
+                label="Card 2 — Recommendation Text"
+                default="Unit velocity trending +9% YA for Kind Dark Chocolate Almond Coconut. Recommend secondary display in the Snacking aisle to capitalize on incremental demand."
+                description="The recommendation body text shown on the card."/>
+
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,134 @@
+<template>
+    <div class="rm-wrapper">
+
+        <!-- ═══ Header ═══ -->
+        <div class="rm-header">
+            <lightning-icon icon-name="standard:contact" size="small" class="rm-header-icon"></lightning-icon>
+            <div>
+                <h1 class="rm-title">Kroger Relationship Map</h1>
+                <p class="rm-subtitle">Confectionery &amp; Snacking — Key Stakeholders</p>
+            </div>
+        </div>
+
+        <!-- ═══ Org Tree ═══ -->
+        <div class="rm-tree-wrap">
+            <ul class="rm-tree">
+                <li>
+                    <!-- Level 1: Procurement VP -->
+                    <button class={nodes.vp.cardClass} data-id="vp" onclick={handleSelect}>
+                        <div class="rm-avatar rm-avatar--exec">{nodes.vp.initials}</div>
+                        <div class="rm-card-body">
+                            <div class="rm-name">{nodes.vp.name}</div>
+                            <div class="rm-role">{nodes.vp.title}</div>
+                            <span class={nodes.vp.relClass}>{nodes.vp.relationship}</span>
+                        </div>
+                    </button>
+
+                    <ul>
+                        <!-- Level 2a: Confectionery Category Manager -->
+                        <li>
+                            <button class={nodes.confecCM.cardClass} data-id="confecCM" onclick={handleSelect}>
+                                <div class="rm-avatar rm-avatar--mgr">{nodes.confecCM.initials}</div>
+                                <div class="rm-card-body">
+                                    <div class="rm-name">{nodes.confecCM.name}</div>
+                                    <div class="rm-role">{nodes.confecCM.title}</div>
+                                    <span class={nodes.confecCM.relClass}>{nodes.confecCM.relationship}</span>
+                                </div>
+                            </button>
+
+                            <ul>
+                                <!-- Level 3a: Confectionery Buyer Analyst -->
+                                <li>
+                                    <button class={nodes.confecBA.cardClass} data-id="confecBA" onclick={handleSelect}>
+                                        <div class="rm-avatar rm-avatar--analyst">{nodes.confecBA.initials}</div>
+                                        <div class="rm-card-body">
+                                            <div class="rm-name">{nodes.confecBA.name}</div>
+                                            <div class="rm-role">{nodes.confecBA.title}</div>
+                                            <span class={nodes.confecBA.relClass}>{nodes.confecBA.relationship}</span>
+                                        </div>
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Level 2b: Snacking Category Manager -->
+                        <li>
+                            <button class={nodes.snackCM.cardClass} data-id="snackCM" onclick={handleSelect}>
+                                <div class="rm-avatar rm-avatar--mgr">{nodes.snackCM.initials}</div>
+                                <div class="rm-card-body">
+                                    <div class="rm-name">{nodes.snackCM.name}</div>
+                                    <div class="rm-role">{nodes.snackCM.title}</div>
+                                    <span class={nodes.snackCM.relClass}>{nodes.snackCM.relationship}</span>
+                                </div>
+                            </button>
+
+                            <ul>
+                                <!-- Level 3b: Snacking Buyer Analyst -->
+                                <li>
+                                    <button class={nodes.snackBA.cardClass} data-id="snackBA" onclick={handleSelect}>
+                                        <div class="rm-avatar rm-avatar--analyst">{nodes.snackBA.initials}</div>
+                                        <div class="rm-card-body">
+                                            <div class="rm-name">{nodes.snackBA.name}</div>
+                                            <div class="rm-role">{nodes.snackBA.title}</div>
+                                            <span class={nodes.snackBA.relClass}>{nodes.snackBA.relationship}</span>
+                                        </div>
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ═══ Detail Drawer (shown when a node is selected) ═══ -->
+        <template lwc:if={selectedNode}>
+            <div class="rm-detail">
+                <div class="rm-detail-left">
+                    <div class={selectedNode.avatarClass}>{selectedNode.initials}</div>
+                    <div>
+                        <div class="rm-detail-name">{selectedNode.name}</div>
+                        <div class="rm-detail-role">{selectedNode.title}</div>
+                        <div class="rm-detail-dept">{selectedNode.department}</div>
+                    </div>
+                </div>
+                <div class="rm-detail-divider"></div>
+                <div class="rm-detail-mid">
+                    <div class="rm-detail-row">
+                        <lightning-icon icon-name="utility:email" size="xx-small" class="rm-detail-icon"></lightning-icon>
+                        <span>{selectedNode.email}</span>
+                    </div>
+                    <div class="rm-detail-row">
+                        <lightning-icon icon-name="utility:location" size="xx-small" class="rm-detail-icon"></lightning-icon>
+                        <span>{selectedNode.location}</span>
+                    </div>
+                    <div class="rm-detail-row">
+                        <lightning-icon icon-name="utility:clock" size="xx-small" class="rm-detail-icon"></lightning-icon>
+                        <span>Last contact: {selectedNode.lastContact}</span>
+                    </div>
+                </div>
+                <div class="rm-detail-divider"></div>
+                <div class="rm-detail-right">
+                    <div class="rm-detail-note-label">KAM Note</div>
+                    <div class="rm-detail-note-text">{selectedNode.note}</div>
+                </div>
+                <button class="rm-detail-close" onclick={handleClose} title="Close">
+                    <lightning-icon icon-name="utility:close" size="xx-small"></lightning-icon>
+                </button>
+            </div>
+        </template>
+
+        <!-- ═══ Legend ═══ -->
+        <div class="rm-legend">
+            <span class="legend-item"><span class="legend-dot legend-exec"></span>Executive</span>
+            <span class="legend-item"><span class="legend-dot legend-mgr"></span>Category Manager</span>
+            <span class="legend-item"><span class="legend-dot legend-analyst"></span>Buyer Analyst</span>
+            <span class="legend-sep"></span>
+            <span class="legend-item"><span class="legend-rel legend-strong"></span>Strong</span>
+            <span class="legend-item"><span class="legend-rel legend-active"></span>Active</span>
+            <span class="legend-item"><span class="legend-rel legend-new"></span>New</span>
+        </div>
+
+    </div>
+</template>

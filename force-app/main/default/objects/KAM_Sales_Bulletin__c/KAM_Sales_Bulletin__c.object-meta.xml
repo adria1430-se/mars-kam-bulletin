@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Central dashboard record for Key Account Managers to monitor account health, alerts, and opportunities across their assigned retailers.</description>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>KAM Sales Bulletin</label>
+    <nameField>
+        <label>Bulletin Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>KAM Sales Bulletins</pluralLabel>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

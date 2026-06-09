@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customObject>true</customObject>
+    <description>Define penny perfect pricing context</description>
+    <icon>cgcloud__CGCloud_Public_Documents/cgcloud__Pricing_Icon_Lex.png</icon>
+    <motif>Custom314: TV Widescreen</motif>
+</CustomTab>

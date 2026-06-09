@@ -1,0 +1,131 @@
+/* ═══════════════════════════════════════
+   Wrapper
+═══════════════════════════════════════ */
+.ir-wrapper {
+    background: #ffffff;
+    border: 1px solid #dddbda;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    font-family: 'Salesforce Sans', Arial, sans-serif;
+}
+
+/* ═══════════════════════════════════════
+   Header — gradient blue bar (matches mockup)
+═══════════════════════════════════════ */
+.ir-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.25rem;
+    background: linear-gradient(135deg, #a8d4f5 0%, #c5e3fb 60%, #daeefe 100%);
+}
+
+.ir-header-icon {
+    --lwc-colorTextIconDefault: #0176d3;
+}
+
+.ir-header-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #032d60;
+}
+
+/* ═══════════════════════════════════════
+   Feed
+═══════════════════════════════════════ */
+.ir-feed {
+    padding: 0.875rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+}
+
+/* ═══════════════════════════════════════
+   Card
+═══════════════════════════════════════ */
+.ir-card {
+    border: 1px solid #e0e5ee;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: #ffffff;
+    transition: box-shadow 0.15s ease;
+}
+
+.ir-card:hover {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ─── Product image banner ─── */
+.ir-card-banner {
+    height: 8rem;
+    overflow: hidden;
+    background: #f3f3f3;
+}
+
+.ir-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* ─── Card body ─── */
+.ir-card-body {
+    padding: 0.875rem 1rem;
+}
+
+.ir-card-text {
+    font-size: 0.8125rem;
+    color: #3e3e3c;
+    line-height: 1.5;
+    margin: 0 0 0.75rem;
+}
+
+/* ─── Actions ─── */
+.ir-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.ir-dismiss-btn {
+    background: none;
+    border: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #0176d3;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.ir-dismiss-btn:hover {
+    color: #014486;
+    text-decoration: underline;
+}
+
+/* ═══════════════════════════════════════
+   Empty State
+═══════════════════════════════════════ */
+.ir-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.ir-empty-icon {
+    --lwc-colorTextIconDefault: #2e7d32;
+}
+
+.ir-empty-text {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #3e3e3c;
+    margin: 0;
+}
